@@ -2,6 +2,7 @@ import '@assets/main.css';
 import 'nprogress/nprogress.css';
 
 import { useEffect } from 'react';
+import { SWRConfig } from 'swr';
 import type { AppProps } from 'next/app';
 import Script from 'next/script';
 import { useRouter } from 'next/router';
@@ -9,6 +10,7 @@ import NProgress from 'nprogress';
 
 import ManagedUIContext from '@components/context';
 import { CommonLayout } from '@components/layout';
+import { swrFetcher } from '@lib/fetcher';
 
 NProgress.configure({
   minimum: 0.3,
@@ -36,9 +38,11 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Script src="/js/redirectIE.js" strategy="beforeInteractive" />
       <ManagedUIContext>
-        <CommonLayout>
-          <Component {...pageProps} />
-        </CommonLayout>
+        <SWRConfig value={{ fetcher: swrFetcher }}>
+          <CommonLayout>
+            <Component {...pageProps} />
+          </CommonLayout>
+        </SWRConfig>
       </ManagedUIContext>
     </>
   );

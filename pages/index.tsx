@@ -2,20 +2,34 @@
  * @template PageComponent
  */
 
-import { useState } from 'react';
-import NextLink from 'next/link';
-
-import { useUI } from '@components/context';
-import { Button } from '@components/ui';
-import { fetcher } from '@lib/fetcher';
+import { Button, Link } from '@components/ui';
+import useContextWithSWR from '@lib/hooks/use-context-with-swr';
 
 export default function IndexPage() {
-  const { showAlert, showModal, closeModal, showNoti } = useUI();
-  const [result, setResult] = useState<string | null>(null);
+  const [username, setUsername] = useContextWithSWR<string>('@username', 'kay');
 
   return (
-    <div className="flex justify-center pt-24">
+    <div className="flex flex-col items-center pt-24">
       <p className="text-2xl font-semibold">Jongsik Prac</p>
+      <div className="mt-8">
+        <p className="text-lg font-semibold">useToggleWithSWR</p>
+        <p>swrValue: {String(username)}</p>
+        <div className="mt-2">
+          <Button
+            onClick={() => {
+              setUsername('jongsik');
+            }}
+            size="sm"
+          >
+            change name
+          </Button>
+          <Link href="/swr">
+            <Button size="sm" className="ml-2">
+              go another page
+            </Button>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
