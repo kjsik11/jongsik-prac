@@ -1,7 +1,7 @@
 {
-  "name": "next-tailwind-ts-template",
-  "version": "3.6.3",
-  "description": "template project",
+  "name": "jongsik-prac",
+  "version": "0.1.0",
+  "description": "jongsik project",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
