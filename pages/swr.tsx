@@ -9,14 +9,6 @@ export default function SWR() {
       <div className="mt-8">
         <p className="text-lg font-semibold">useContextWithSWR</p>
         <p>swrValue: {String(username)}</p>
-        <Button
-          onClick={() => {
-            setUsername('kay.kim');
-          }}
-          size="sm"
-        >
-          change name
-        </Button>
         <Link href="/">
           <Button size="sm" className="ml-2">
             Go Home

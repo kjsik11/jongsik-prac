@@ -4,20 +4,27 @@
 
 import { Button, Link } from '@components/ui';
 import useContextWithSWR from '@lib/hooks/use-context-with-swr';
+import { useState } from 'react';
 
 export default function IndexPage() {
   const [username, setUsername] = useContextWithSWR<string>('@username', 'kay');
+  const [nameInput, setNameInput] = useState<string>('');
 
   return (
     <div className="flex flex-col items-center pt-24">
       <p className="text-2xl font-semibold">Jongsik Prac</p>
       <div className="mt-8">
-        <p className="text-lg font-semibold">useToggleWithSWR</p>
+        <input
+          placeholder="input name"
+          onChange={(e) => setNameInput(e.target.value)}
+          value={nameInput}
+          className="border w-60 p-2 border-black rounded-md"
+        />
         <p>swrValue: {String(username)}</p>
         <div className="mt-2">
           <Button
             onClick={() => {
-              setUsername('jongsik');
+              setUsername(nameInput);
             }}
             size="sm"
           >
