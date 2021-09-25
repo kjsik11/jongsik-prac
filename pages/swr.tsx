@@ -2,7 +2,7 @@ import { Button, Link } from '@components/ui';
 import useContextWithSWR from '@lib/hooks/use-context-with-swr';
 
 export default function SWR() {
-  const [username, setUsername] = useContextWithSWR<string>('@username', 'kay');
+  const [username] = useContextWithSWR<string>('@username', 'kay');
 
   return (
     <div className="flex flex-col items-center pt-24">
