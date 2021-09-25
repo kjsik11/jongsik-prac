@@ -2,9 +2,11 @@
  * @template PageComponent
  */
 
-import { Button, Link } from '@components/ui';
-import useContextWithSWR from '@lib/hooks/use-context-with-swr';
 import { useState } from 'react';
+
+import { Button, Link } from '@components/ui';
+
+import useContextWithSWR from '@lib/hooks/use-context-with-swr';
 
 export default function IndexPage() {
   const [username, setUsername] = useContextWithSWR<string>('@username', 'kay');
