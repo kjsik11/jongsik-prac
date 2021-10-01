@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "cypress": "cypress open"
   },
   "keywords": [
     "react",
@@ -36,6 +37,7 @@
     "@types/nprogress": "0.2.0",
     "@types/react": "17.0.11",
     "autoprefixer": "10.2.6",
+    "cypress": "8.5.0",
     "eslint": "7.29.0",
     "eslint-config-next": "11.0.1",
     "eslint-config-prettier": "8.3.0",
