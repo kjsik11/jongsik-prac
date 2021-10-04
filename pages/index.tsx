@@ -38,6 +38,13 @@ export default function IndexPage() {
             </Button>
           </Link>
         </div>
+        <div className="mt-4">
+          <Link href="/spring">
+            <Button size="sm" className="ml-2">
+              react-spring
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   );
