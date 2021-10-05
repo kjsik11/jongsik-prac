@@ -10,9 +10,9 @@ export default function ParallaxPage() {
   const [inViewRef4, inView4] = useInView({ rootMargin: '300px' });
   const [inViewRef5, inView5] = useInView({ rootMargin: '300px' });
 
-  const [{ x }, api] = useSpring(() => ({
+  const [style, api] = useSpring(() => ({
     x: 0,
-    config: { duration: 300 },
+    config: { tension: 500, mass: 3 },
   }));
 
   useEffect(() => {
@@ -77,6 +77,7 @@ export default function ParallaxPage() {
 
   return (
     <div>
+      {console.log(style)}
       <div className="h-[1000px] flex justify-center items-center max-w-3xl mx-auto">
         <p>
           What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -96,7 +97,7 @@ export default function ParallaxPage() {
         </p>
       </div>
       <animated.div
-        style={{ left: x.to((x) => `${x}%`) }}
+        style={{ ...style, left: style.x.to((x) => `${x}%`) }}
         className={
           'mx-60 w-60 h-40 bg-red-400 rounded-md sticky top-40 flex items-center justify-center'
         }
