@@ -44,6 +44,11 @@ export default function IndexPage() {
               react-spring
             </Button>
           </Link>
+          <Link href="/docs">
+            <Button size="sm" className="ml-2">
+              docs
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
