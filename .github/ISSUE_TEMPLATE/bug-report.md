@@ -13,9 +13,11 @@ assignees: kjsik11
 
 ## Expected Behavior
 
-## Branch name / Browser
+## Code Example
 
-## Additional Context
+## Branch / Browser / Device
+
+## Additional Context 
 
 
 
