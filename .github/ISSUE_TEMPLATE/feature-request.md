@@ -19,9 +19,6 @@ assignees: ''
 
 ex) [Next Link](https://nextjs.org/docs/api-reference/next/link) 
 
-## Code Example
-``` typescript
-
-```
-
 ## Additional Context
+
+기타 추가적인 내용이 있다면 양식에 상관없이 자유롭게 추가해주세요.
