@@ -80,6 +80,14 @@ export default function App({ Component, pageProps }: AppProps) {
               'BOJY0SIfs5CJWgmYVn3o75DS3_Bvt_QaforsjzvGawakqUwcdpqYCUjxqq-qPFRg8iRAq1POivs2xGexbgTh-B8',
           };
 
+          addEventListener('push', async function (event) {
+            (event as any).waitUntil(
+              registration.showNotification('title', {
+                body: 'body',
+              }),
+            );
+          });
+
           return registration.pushManager.subscribe(subscribeOptions);
         })
         .then(function (pushSubscription) {
