@@ -2,7 +2,7 @@
  * @template PageComponent
  */
 
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 
 import { Button, Link } from '@components/ui';
 
@@ -11,24 +11,6 @@ import useContextWithSWR from '@lib/hooks/use-context-with-swr';
 export default function IndexPage() {
   const [username, setUsername] = useContextWithSWR<string>('@username', 'kay');
   const [nameInput, setNameInput] = useState<string>('');
-
-  const subscriptUserToPush = useCallback(() => {
-    return navigator.serviceWorker
-      .register('/sw.js')
-      .then(function (registration) {
-        const subscribeOptions = {
-          userVisibleOnly: true,
-          applicationServerKey:
-            'BOJY0SIfs5CJWgmYVn3o75DS3_Bvt_QaforsjzvGawakqUwcdpqYCUjxqq-qPFRg8iRAq1POivs2xGexbgTh-B8',
-        };
-
-        return registration.pushManager.subscribe(subscribeOptions);
-      })
-      .then(function (pushSubscription) {
-        console.log('Received PushSubscription: ', JSON.stringify(pushSubscription));
-        return pushSubscription;
-      });
-  }, []);
 
   return (
     <div className="flex flex-col items-center pt-24">
@@ -68,7 +50,6 @@ export default function IndexPage() {
             </Button>
           </Link>
         </div>
-        <Button onClick={subscriptUserToPush}>Push</Button>
       </div>
     </div>
   );
