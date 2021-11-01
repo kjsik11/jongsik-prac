@@ -20,6 +20,10 @@
       "src":"/icon-384x384.jpg",
       "sizes":"384x384",
       "type":"image/jpeg"
+    },{
+      "src":"/icon-512x512.jpg",
+      "sizes":"512x512",
+      "type":"image/jpeg"
     }
   ]
 }
