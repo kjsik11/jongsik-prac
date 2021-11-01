@@ -70,6 +70,16 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
 
   useEffect(() => {
+    navigator.serviceWorker.register('/sw.js').then((registration) => {
+      const title = 'Sound Notification';
+      const options = {
+        body: 'Simple piece of body text.\nSecond line of body text :)',
+      };
+      registration.showNotification(title, options);
+    });
+  }, []);
+
+  useEffect(() => {
     function subscribeUserToPush() {
       return navigator.serviceWorker
         .register('/sw.js')
