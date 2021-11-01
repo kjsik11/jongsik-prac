@@ -1,0 +1,25 @@
+{
+  "theme_color": "#f69435",
+  "background_color":"#f69435",
+  "display":"standalone",
+  "scope":"/",
+  "start_url":"/",
+  "name":"Next PWA Test",
+  "description": "Cool app",
+  "short_name":"Next PWA Test",
+  "icons":[
+    {
+      "src":"/icon-192x192.jpg",
+      "sizes":"192x192",
+      "type":"image/jpeg"
+    },{
+      "src":"/icon-256x256.jpg",
+      "sizes":"256x256",
+      "type":"image/jpeg"
+    },{
+      "src":"/icon-384x384.jpg",
+      "sizes":"384x384",
+      "type":"image/jpeg"
+    }
+  ]
+}
