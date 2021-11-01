@@ -29,6 +29,7 @@ export default function CommonLayout({ children }: { children: React.ReactNode }
             onClick: () => {
               deferredPrompt.current.prompt();
               console.log('User accepted the prompt');
+              closeModal();
             },
             label: 'yes',
           },
@@ -43,7 +44,7 @@ export default function CommonLayout({ children }: { children: React.ReactNode }
       // Optionally, send analytics event that PWA install promo was shown.
       console.log(`'beforeinstallprompt' event was fired.`);
     });
-  }, []);
+  }, [closeModal, showModal]);
 
   return (
     <div className="relative h-full w-full">
