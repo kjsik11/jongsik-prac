@@ -1,6 +1,6 @@
 {
   "name": "Next PWA demo",
-  "short_name": "Mext PWA",
+  "short_name": "Next PWA",
   "icons": [
     {
       "src": "/icon.png",

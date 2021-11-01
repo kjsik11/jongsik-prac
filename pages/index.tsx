@@ -50,6 +50,7 @@ export default function IndexPage() {
             </Button>
           </Link>
         </div>
+        <Button onClick={() => {}}>Push</Button>
       </div>
     </div>
   );
