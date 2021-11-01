@@ -11,7 +11,7 @@ export default function CommonLayout({ children }: { children: React.ReactNode }
   useEffect(() => {
     // Initialize deferredPrompt for use later to show browser install prompt.
     let deferredPrompt;
-
+    console.log('hello2');
     window.addEventListener('beforeinstallprompt', (e) => {
       console.log('hello');
       // Prevent the mini-infobar from appearing on mobile
