@@ -4,7 +4,7 @@ import 'nprogress/nprogress.css';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
 import NProgress from 'nprogress';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { SWRConfig } from 'swr';
 
 import ManagedUIContext from '@components/context';
@@ -22,7 +22,6 @@ NProgress.configure({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [check, setCheck] = useState<any>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -70,16 +69,6 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
 
   useEffect(() => {
-    navigator.serviceWorker.register('/sw.js').then((registration) => {
-      const title = 'Sound Notification';
-      const options = {
-        body: 'Simple piece of body text.\nSecond line of body text :)',
-      };
-      registration.showNotification(title, options);
-    });
-  }, []);
-
-  useEffect(() => {
     function subscribeUserToPush() {
       return navigator.serviceWorker
         .register('/sw.js')
@@ -90,14 +79,6 @@ export default function App({ Component, pageProps }: AppProps) {
               'BOJY0SIfs5CJWgmYVn3o75DS3_Bvt_QaforsjzvGawakqUwcdpqYCUjxqq-qPFRg8iRAq1POivs2xGexbgTh-B8',
           };
 
-          addEventListener('push', async function (event) {
-            (event as any).waitUntil(
-              registration.showNotification('title', {
-                body: 'body',
-              }),
-            );
-          });
-
           return registration.pushManager.subscribe(subscribeOptions);
         })
         .then(function (pushSubscription) {
@@ -107,7 +88,6 @@ export default function App({ Component, pageProps }: AppProps) {
     }
 
     subscribeUserToPush().then((subscriptionObject) => {
-      setCheck(subscriptionObject);
       saveSubscription(subscriptionObject);
     });
   }, [saveSubscription]);
@@ -118,7 +98,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <ManagedUIContext>
         <SWRConfig value={{ fetcher: swrFetcher }}>
           <CommonLayout>
-            {JSON.stringify(check)}
             <Component {...pageProps} />
           </CommonLayout>
         </SWRConfig>
