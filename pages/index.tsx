@@ -49,6 +49,11 @@ export default function IndexPage() {
               docs
             </Button>
           </Link>
+          <Link href="/immutable">
+            <Button size="sm" className="ml-2">
+              useSwrImmutable test
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

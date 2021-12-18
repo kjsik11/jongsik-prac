@@ -4,6 +4,7 @@ export const fetcher = ky.extend({
   hooks: {
     afterResponse: [
       async (_req, _opt, res) => {
+        console.log('fetched');
         if (!res.ok) {
           const contentType = res.headers.get('Content-Type');
           if (!contentType || contentType.indexOf('application/json') === -1)

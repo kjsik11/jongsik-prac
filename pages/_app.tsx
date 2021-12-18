@@ -4,13 +4,13 @@ import 'nprogress/nprogress.css';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
 import NProgress from 'nprogress';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import { SWRConfig } from 'swr';
 
 import ManagedUIContext from '@components/context';
 import { CommonLayout } from '@components/layout';
 
-import { fetcher, swrFetcher } from '@lib/fetcher';
+import { swrFetcher } from '@lib/fetcher';
 
 import type { AppProps } from 'next/app';
 
@@ -36,64 +36,11 @@ export default function App({ Component, pageProps }: AppProps) {
     };
   }, [router]);
 
-  useEffect(() => {
-    function askPermission() {
-      return new Promise(function (resolve, reject) {
-        const permissionResult = Notification.requestPermission(function (result) {
-          resolve(result);
-        });
-
-        if (permissionResult) {
-          permissionResult.then(resolve, reject);
-        }
-      }).then(function (permissionResult) {
-        if (permissionResult !== 'granted') {
-          throw new Error("We weren't granted permission.");
-        }
-      });
-    }
-
-    askPermission();
-  }, []);
-
-  const saveSubscription = useCallback(async (subscriptionOption: any) => {
-    try {
-      await fetcher
-        .post('/api/save-subscription', {
-          json: { sub: subscriptionOption },
-        })
-        .json();
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
-
-  useEffect(() => {
-    function subscribeUserToPush() {
-      return navigator.serviceWorker
-        .register('/sw.js')
-        .then(function (registration) {
-          const subscribeOptions = {
-            userVisibleOnly: true,
-            applicationServerKey:
-              'BOJY0SIfs5CJWgmYVn3o75DS3_Bvt_QaforsjzvGawakqUwcdpqYCUjxqq-qPFRg8iRAq1POivs2xGexbgTh-B8',
-          };
-
-          return registration.pushManager.subscribe(subscribeOptions);
-        })
-        .then(function (pushSubscription) {
-          console.log('Received PushSubscription: ', JSON.stringify(pushSubscription));
-          return pushSubscription;
-        });
-    }
-
-    subscribeUserToPush().then((subscriptionObject) => {
-      saveSubscription(subscriptionObject);
-    });
-  }, [saveSubscription]);
-
   return (
     <>
+      {process.env.NODE_ENV === 'development' && (
+        <Script src="https://cdn-tailwindcss.vercel.app/" />
+      )}
       <Script src="/js/redirectIE.js" strategy="beforeInteractive" />
       <ManagedUIContext>
         <SWRConfig value={{ fetcher: swrFetcher }}>
