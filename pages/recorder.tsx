@@ -9,11 +9,12 @@ export default function RecorderPage() {
     <div className="mx-auto max-w-2xl mt-20">
       <audio src={audioURL} controls />
       <div className="space-x-2 my-4">
-        <Button onClick={startRecording} disabled={isRecording}>
-          start recording
-        </Button>
-        <Button onClick={stopRecording} disabled={!isRecording}>
-          stop recording
+        <Button
+          className="flex justify-center w-40"
+          onClick={isRecording ? stopRecording : startRecording}
+          color={isRecording ? 'red' : 'blue'}
+        >
+          {isRecording ? 'stop' : 'start'}
         </Button>
       </div>
     </div>
