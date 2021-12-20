@@ -49,6 +49,11 @@ export default function IndexPage() {
               docs
             </Button>
           </Link>
+          <Link href="/recorder">
+            <Button size="sm" className="ml-2">
+              media-recorder
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
