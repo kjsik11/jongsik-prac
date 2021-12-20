@@ -3,7 +3,7 @@ import { Button } from '@components/ui';
 import useRecorder from '@lib/hooks/use-recoder';
 
 export default function RecorderPage() {
-  const { audioURL, isRecording, startRecording, stopRecording } = useRecorder();
+  const { audioURL, isRecording, startRecording, stopRecording, resetRecorder } = useRecorder();
 
   return (
     <div className="mx-auto max-w-2xl mt-20">
@@ -16,6 +16,7 @@ export default function RecorderPage() {
         >
           {isRecording ? 'stop' : 'start'}
         </Button>
+        <Button onClick={resetRecorder}>Reset</Button>
       </div>
     </div>
   );

@@ -5,8 +5,16 @@ export default function useRecorder() {
   const [isRecording, setIsRecording] = useState(false);
   const [recorder, setRecorder] = useState<MediaRecorder | null>(null);
 
+  const resetRecorder = useCallback(async () => {
+    setAudioURL('');
+    setIsRecording(false);
+    setRecorder(null);
+    if (recorder) recorder.stream.getTracks().forEach((track) => track.stop());
+  }, [recorder]);
+
   const requestRecorder = useCallback(async () => {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
     return new MediaRecorder(stream);
   }, []);
 
@@ -40,5 +48,5 @@ export default function useRecorder() {
     return () => recorder.removeEventListener('dataavailable', handleData);
   }, [recorder, isRecording, requestRecorder]);
 
-  return { audioURL, isRecording, startRecording, stopRecording };
+  return { audioURL, isRecording, startRecording, stopRecording, resetRecorder };
 }
