@@ -1,10 +1,7 @@
-/**
- * @template PageComponent
- */
-
+import NextLink from 'next/link';
 import { useState } from 'react';
 
-import { Button, Link } from '@components/ui';
+import { Button } from '@components/ui';
 
 import useContextWithSWR from '@lib/hooks/use-context-with-swr';
 
@@ -32,33 +29,41 @@ export default function IndexPage() {
           >
             change name
           </Button>
-          <Link href="/swr">
+          <NextLink href="/swr">
             <Button size="sm" className="ml-2">
               go another page
             </Button>
-          </Link>
+          </NextLink>
         </div>
-        <div className="mt-4">
-          <Link href="/spring">
-            <Button size="sm" className="ml-2">
+        <div className="mt-12">
+          <p className="text-lg mb-2 font-bold">Other practices</p>
+          <NextLink passHref href="/spring">
+            <Button as="a" size="sm">
               react-spring
             </Button>
-          </Link>
-          <Link href="/docs">
-            <Button size="sm" className="ml-2">
+          </NextLink>
+          <NextLink passHref href="/docs">
+            <Button as="a" size="sm" className="ml-2">
               docs
             </Button>
-          </Link>
-          <Link href="/recorder">
-            <Button size="sm" className="ml-2">
+          </NextLink>
+          <NextLink passHref href="/recorder">
+            <Button as="a" size="sm" className="ml-2">
               media-recorder
             </Button>
-          </Link>
-          <Link href="/immutable">
-            <Button size="sm" className="ml-2">
+          </NextLink>
+          <NextLink passHref href="/immutable">
+            <Button as="a" size="sm" className="ml-2">
               useSwrImmutable test
             </Button>
-          </Link>
+          </NextLink>
+        </div>
+        <div className="mt-4">
+          <NextLink passHref href="/react-query">
+            <Button as="a" size="sm">
+              SWR vs React Query
+            </Button>
+          </NextLink>
         </div>
       </div>
     </div>

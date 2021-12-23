@@ -1,4 +1,6 @@
-import { Button, Link } from '@components/ui';
+import NextLink from 'next/link';
+
+import { Button } from '@components/ui';
 
 import useContextWithSWR from '@lib/hooks/use-context-with-swr';
 
@@ -10,11 +12,11 @@ export default function SWR() {
       <div className="mt-8">
         <p className="text-lg font-semibold">useContextWithSWR</p>
         <p>swrValue: {String(username)}</p>
-        <Link href="/">
-          <Button size="sm" className="ml-2">
+        <NextLink passHref href="/">
+          <Button size="sm" as="a" className="ml-2">
             Go Home
           </Button>
-        </Link>
+        </NextLink>
       </div>
     </div>
   );

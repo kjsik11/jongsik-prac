@@ -1,10 +1,11 @@
 import { debounce } from 'lodash';
+import NextLink from 'next/link';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { SpringValue } from 'react-spring';
 import { useSpring, animated } from 'react-spring';
 
-import { Button, Link } from '@components/ui';
+import { Button } from '@components/ui';
 
 interface TextProps {
   children: string;
@@ -44,22 +45,24 @@ export default function SpringTestPage() {
 
   return (
     <div className="mt-40 mx-auto flex flex-col items-center">
-      <div className="h-[1500px]" />
+      <div className="h-[1000px]" />
       <div
         ref={ref}
-        className="hello relative w-full h-full overflow-y-scroll text-justify text-white bg-black font-bold text-lg"
+        className="relative w-full h-full overflow-y-scroll text-justify text-white bg-black font-bold text-lg"
       >
         <div
           className="p-4"
-          style={{ position: 'relative', height: '100vh', width: '100%', overflow: 'hidden' }}
+          style={{ position: 'relative', height: '80vh', width: '100%', overflow: 'hidden' }}
         >
           <animated.div className="w-80 h-80 mt-20 bg-green-300 rounded-md" style={styles} />
         </div>
       </div>
       <div className="mt-4">
-        <Link href="/" className="mt-80">
-          <Button>Go Home</Button>
-        </Link>
+        <NextLink passHref href="/">
+          <Button className="my-40" as="a">
+            Go Home
+          </Button>
+        </NextLink>
       </div>
     </div>
   );

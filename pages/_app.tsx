@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import Script from 'next/script';
 import NProgress from 'nprogress';
 import { useEffect } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { SWRConfig } from 'swr';
 
 import ManagedUIContext from '@components/context';
@@ -22,6 +23,7 @@ NProgress.configure({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
+  const queryClient = new QueryClient();
   const router = useRouter();
 
   useEffect(() => {
@@ -44,9 +46,11 @@ export default function App({ Component, pageProps }: AppProps) {
       <Script src="/js/redirectIE.js" strategy="beforeInteractive" />
       <ManagedUIContext>
         <SWRConfig value={{ fetcher: swrFetcher }}>
-          <CommonLayout>
-            <Component {...pageProps} />
-          </CommonLayout>
+          <QueryClientProvider client={queryClient}>
+            <CommonLayout>
+              <Component {...pageProps} />
+            </CommonLayout>
+          </QueryClientProvider>
         </SWRConfig>
       </ManagedUIContext>
     </>
