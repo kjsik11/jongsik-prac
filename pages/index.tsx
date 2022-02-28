@@ -58,10 +58,15 @@ export default function IndexPage() {
             </Button>
           </NextLink>
         </div>
-        <div className="mt-4">
+        <div className="mt-4 space-x-2">
           <NextLink passHref href="/react-query">
             <Button as="a" size="sm">
               SWR vs React Query
+            </Button>
+          </NextLink>
+          <NextLink passHref href="/react-memo">
+            <Button as="a" size="sm">
+              React.Memo
             </Button>
           </NextLink>
         </div>
