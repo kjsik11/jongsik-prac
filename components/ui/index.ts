@@ -6,3 +6,4 @@ export { default as Notification } from './Notification';
 export { default as Select } from './Select';
 export { default as MemoTestButton } from './MemoTestButton';
 export { default as TestButton } from './TestButton';
+export { default as TestModal } from './TestModal';
