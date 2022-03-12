@@ -69,6 +69,11 @@ export default function IndexPage() {
               React.Memo
             </Button>
           </NextLink>
+          <NextLink passHref href="/transition-test">
+            <Button as="a" size="sm">
+              Trasition Test
+            </Button>
+          </NextLink>
         </div>
       </div>
     </div>
