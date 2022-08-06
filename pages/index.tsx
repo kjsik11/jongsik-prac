@@ -36,6 +36,12 @@ export default function IndexPage() {
           </NextLink>
         </div>
         <div className="mt-12">
+          <p className="text-lg mb-2 font-bold">Bitcoin</p>
+          <NextLink passHref href="/crypto">
+            <Button>index</Button>
+          </NextLink>
+        </div>
+        <div className="mt-12">
           <p className="text-lg mb-2 font-bold">Other practices</p>
           <NextLink passHref href="/spring">
             <Button as="a" size="sm">
