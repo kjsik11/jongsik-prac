@@ -3,7 +3,7 @@ import { CheckIcon, ExclamationIcon } from '@heroicons/react/outline';
 import cn from 'classnames';
 import { Fragment, useRef } from 'react';
 
-interface ModalProps {
+export interface ModalProps {
   show: boolean;
   variant?: 'default' | 'alert';
   title: string;

@@ -5,6 +5,7 @@ import { ethers } from 'ethers';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 
+import { useUI } from '@components/context';
 import { Button } from '@components/ui';
 
 import simple_token_abi from '../../public/simple_token_abi.json';
@@ -22,7 +23,8 @@ export default function Bitcoin() {
 
   const [contract, setContract] = useState<any | null>(null);
   const [address, setAddress] = useState('');
-  const [err, setErr] = useState('');
+
+  const { showNoti, showAlert } = useUI();
 
   const accountChangeHandler = useCallback((address) => {
     setAddress(address);
@@ -46,32 +48,34 @@ export default function Bitcoin() {
         .request({ method: 'eth_requestAccounts' })
         .then((result: string[]) => {
           if (result.length > 0) accountChangeHandler(result[0]);
-          else setErr('No result');
+          else showAlert({ name: 'No result', message: '' });
         })
-        .catch((err: Error) => setErr(err.message));
+        .catch(showAlert);
     } else {
       window.alert('need to install metamask first');
     }
-  }, [accountChangeHandler]);
+  }, [accountChangeHandler, showAlert]);
 
   const handleTransfer = useCallback(async () => {
-    if (!contract || loading) return;
+    if (!contract) return;
 
     setLoading(true);
-    contract
-      .decimals()
-      .then((decimal: number) => {
-        (
-          contract.transfer(receiverAddress, BigInt(amount * Math.pow(10, decimal))) as Promise<any>
-        ).then(({ hash }) => {
-          setTransferHash(hash);
-          setReceiverAddress('');
-          setAmount(0);
-        });
-      })
-      .catch((e: any) => setErr(e.message))
-      .finally(() => setLoading(false));
-  }, [contract, receiverAddress, amount, loading]);
+    try {
+      const decimal = await contract.decimals();
+      const { hash } = await contract.transfer(
+        receiverAddress,
+        BigInt(amount * Math.pow(10, decimal)),
+      );
+      setTransferHash(hash);
+      setReceiverAddress('');
+      setAmount(0);
+      showNoti({ title: 'Receive Succeed' });
+    } catch (err) {
+      showAlert(err);
+    } finally {
+      setLoading(false);
+    }
+  }, [contract, receiverAddress, showAlert, showNoti, amount]);
 
   useEffect(() => {
     if (contract) {
@@ -84,14 +88,6 @@ export default function Bitcoin() {
       });
     }
   }, [contract, address]);
-
-  if (err)
-    return (
-      <div className="flex flex-col items-center pt-20">
-        <p>{err}</p>
-        <Button onClick={() => router.reload()}>Refresh</Button>
-      </div>
-    );
 
   return (
     <div className="max-w-6xl mx-auto pt-20 px-2 space-y-8">
@@ -140,7 +136,7 @@ export default function Bitcoin() {
               value={amount}
             />
             <div className="flex justify-end">
-              <Button disabled={!receiverAddress || !amount}>Submit</Button>
+              <Button disabled={!receiverAddress || !amount || loading}>Submit</Button>
             </div>
           </form>
           {transferHash && (

@@ -4,7 +4,7 @@ import { XIcon } from '@heroicons/react/solid';
 import cn from 'classnames';
 import { Fragment } from 'react';
 
-interface NotificationProps {
+export interface NotificationProps {
   variant?: 'default' | 'alert';
   show: boolean;
   close: () => void;
