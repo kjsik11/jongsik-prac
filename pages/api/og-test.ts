@@ -1,13 +1,18 @@
-import { withErrorHandler } from '@utils/with-error-handler';
+import got from 'got';
 
-import Image from '../../public/images/404.png';
+import { withErrorHandler } from '@utils/with-error-handler';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'GET') {
     console.log(req.headers['user-agent']);
-    return res.send(Image);
+    const image = await got(
+      'https://cox-tech-blog.s3.ap-northeast-2.amazonaws.com/images/original/12+(1).jpg',
+    );
+
+    res.setHeader('Content-Type', 'image/png');
+    return res.send(image.rawBody);
   }
 };
 
