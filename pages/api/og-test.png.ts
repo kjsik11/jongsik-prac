@@ -6,7 +6,6 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'GET') {
-    console.log(req.headers['user-agent']);
     const image = await got(
       'https://cox-tech-blog.s3.ap-northeast-2.amazonaws.com/images/original/12+(1).jpg',
     );
